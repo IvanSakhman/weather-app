@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .item {
-  border: 2px solid #7687b9;
+  border: 2px solid $item-color-blue;
   border-radius: 10px;
   margin: 20px 20px;
   display: flex;
@@ -39,13 +39,14 @@
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 2px solid $item-color-blue;
   width: 80%;
 }
 
 .close {
-  color: #aaaaaa;
   float: right;
-  font-size: 28px;
+  font-size: 45px;
+  margin-top: -20px;
   font-weight: bold;
+  color: $item-color-blue;
 }
