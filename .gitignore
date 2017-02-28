@@ -9,7 +9,7 @@ config
 /coverage
 
 # production
-/build
+/buld
 
 # misc
 

@@ -27,7 +27,7 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
 }
 
-// Input: /User/dan/app/build/static/js/main.82be8.js
+// Input: /User/dan/app/docs/static/js/main.82be8.js
 // Output: /static/js/main.js
 function removeFileNameHash(fileName) {
   return fileName
@@ -52,7 +52,7 @@ function getDifferenceLabel(currentSize, previousSize) {
   }
 }
 
-// First, read the current file sizes in build directory.
+// First, read the current file sizes in docs directory.
 // This lets us display how much they changed later.
 recursive(paths.appBuild, (err, fileNames) => {
   var previousSizeMap = (fileNames || [])
@@ -68,14 +68,14 @@ recursive(paths.appBuild, (err, fileNames) => {
   // if you're in it, you don't end up in Trash
   fs.emptyDirSync(paths.appBuild);
 
-  // Start the webpack build
+  // Start the webpack docs
   build(previousSizeMap);
 
   // Merge with the public folder
   copyPublicFolder();
 });
 
-// Print a detailed summary of build files.
+// Print a detailed summary of docs files.
 function printFileSizes(stats, previousSizeMap) {
   var assets = stats.toJson().assets
     .filter(asset => /\.(js|css)$/.test(asset.name))
@@ -119,9 +119,9 @@ function printErrors(summary, errors) {
   });
 }
 
-// Create the production build and print the deployment instructions.
+// Create the production docs and print the deployment instructions.
 function build(previousSizeMap) {
-  console.log('Creating an optimized production build...');
+  console.log('Creating an optimized production docs...');
   webpack(config).run((err, stats) => {
     if (err) {
       printErrors('Failed to compile.', [err]);
@@ -172,8 +172,8 @@ function build(previousSizeMap) {
         console.log('    ' + chalk.dim('// ...'));
         console.log('    ' + chalk.yellow('"scripts"') + ': {');
         console.log('      ' + chalk.dim('// ...'));
-        console.log('      ' + chalk.yellow('"predeploy"') + ': ' + chalk.yellow('"npm run build",'));
-        console.log('      ' + chalk.yellow('"deploy"') + ': ' + chalk.yellow('"gh-pages -d build"'));
+        console.log('      ' + chalk.yellow('"predeploy"') + ': ' + chalk.yellow('"npm run docs",'));
+        console.log('      ' + chalk.yellow('"deploy"') + ': ' + chalk.yellow('"gh-pages -d docs"'));
         console.log('    }');
         console.log();
         console.log('Then run:');
@@ -198,7 +198,7 @@ function build(previousSizeMap) {
         // no homepage
         console.log('The project was built assuming it is hosted at the server root.');
         console.log('To override this, specify the ' + chalk.green('homepage') + ' in your '  + chalk.cyan('package.json') + '.');
-        console.log('For example, add this to build it for GitHub Pages:')
+        console.log('For example, add this to docs it for GitHub Pages:')
         console.log();
         console.log('  ' + chalk.green('"homepage"') + chalk.cyan(': ') + chalk.green('"http://myname.github.io/myapp"') + chalk.cyan(','));
         console.log();

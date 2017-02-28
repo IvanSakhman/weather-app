@@ -91,8 +91,8 @@ function setupCompiler(host, port, protocol) {
       console.log();
       console.log('  ' + chalk.cyan(protocol + '://' + host + ':' + port + '/'));
       console.log();
-      console.log('Note that the development build is not optimized.');
-      console.log('To create a production build, use ' + chalk.cyan(cli + ' run build') + '.');
+      console.log('Note that the development docs is not optimized.');
+      console.log('To create a production docs, use ' + chalk.cyan(cli + ' run docs') + '.');
       console.log();
       isFirstCompile = false;
     }
@@ -224,12 +224,12 @@ function runDevServer(host, port, protocol) {
     // It will still show compile warnings and errors with this setting.
     clientLogLevel: 'none',
     // By default WebpackDevServer serves physical files from current directory
-    // in addition to all the virtual build products that it serves from memory.
+    // in addition to all the virtual docs products that it serves from memory.
     // This is confusing because those files won’t automatically be available in
-    // production build folder unless we copy them. However, copying the whole
+    // production docs folder unless we copy them. However, copying the whole
     // project directory is dangerous because we may expose sensitive files.
     // Instead, we establish a convention that only files in `public` directory
-    // get served. Our build script will copy `public` into the `build` folder.
+    // get served. Our docs script will copy `public` into the `docs` folder.
     // In `index.html`, you can get URL of `public` folder with %PUBLIC_URL%:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In JavaScript code, you can access it with `process.env.PUBLIC_URL`.

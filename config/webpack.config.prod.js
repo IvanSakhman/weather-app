@@ -32,12 +32,12 @@ if (env.stringified['process.env'].NODE_ENV !== '"production"') {
 // Note: defined here because it will be used more than once.
 const cssFilename = 'static/css/[name].[contenthash:8].css';
 
-// ExtractTextPlugin expects the build output to be flat.
+// ExtractTextPlugin expects the docs output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
 // However, our output is structured with css, js and media folders.
 // To have this structure working with relative paths, we have to use custom options.
 const extractTextPluginOptions = shouldUseRelativeAssetPaths
-  // Making sure that the publicPath goes back to to build folder.
+  // Making sure that the publicPath goes back to to docs folder.
   ? { publicPath: Array(cssFilename.split('/').length).join('../') }
   : undefined;
 
@@ -48,7 +48,7 @@ module.exports = {
   // Don't attempt to continue if there are any errors.
   bail: true,
   // We generate sourcemaps in production. This is slow but gives good results.
-  // You can exclude the *.map files from the build during deployment.
+  // You can exclude the *.map files from the docs during deployment.
   devtool: 'source-map',
   // In production, we only want to load the polyfills and the app code.
   entry: [
@@ -56,7 +56,7 @@ module.exports = {
     paths.appIndexJs
   ],
   output: {
-    // The build folder.
+    // The docs folder.
     path: paths.appBuild,
     // Generated JS file names (with nested folders).
     // There will be one main bundle, and one file per asynchronous chunk.
@@ -133,7 +133,7 @@ module.exports = {
       // but unlike in development configuration, we do something different.
       // `ExtractTextPlugin` first applies the "postcss" and "css" loaders
       // (second argument), then grabs the result CSS and puts it into a
-      // separate file in our build process. This way we actually ship
+      // separate file in our docs process. This way we actually ship
       // a single CSS file in production instead of JS code injecting <style>
       // tags. If you use code splitting, however, any async bundles will still
       // use the "style" loader inside the async code so CSS from them won't be
